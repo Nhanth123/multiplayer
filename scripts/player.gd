@@ -1,12 +1,13 @@
 extends CharacterBody2D
 
+
 @export var player_sprite: AnimatedSprite2D
 
 @export var movement_speed = 300
 @export var gravity = 30
 @export var jump_strenghth = 600
 
-@onready var initial_sprite_scale = 1 #player_sprite.scale
+@onready var initial_sprite_scale = player_sprite.scale
 
 func _physics_process(delta: float) -> void:
 	var horizontal_input = (Input.get_action_strength("move_right") 
@@ -30,10 +31,10 @@ func _physics_process(delta: float) -> void:
 		player_sprite.play("jump_start")
 	elif is_walking:
 		player_sprite.play("walk")
-	#elif is_falling:
-	#	player_sprite.play("fall")
-	#elif is_idle:
-	#	player_sprite.play("idle")
+	elif is_falling:
+		player_sprite.play("fall")
+	elif is_idle:
+		player_sprite.play("idle")
 	
 	if not is_zero_approx(horizontal_input):
 		if horizontal_input < 0:

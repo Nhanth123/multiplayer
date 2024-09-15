@@ -69,7 +69,7 @@
 [ext_resource type="Texture2D" uid="uid://c2r31n6lj0pks" path="res://assets/characters/elf/walk/0_Dark_Elves_Walking_023.png" id="66_o4hmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mok4"]
-size = Vector2(40, 56)
+size = Vector2(440, 550)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fss41"]
 animations = [{
@@ -302,16 +302,18 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
 position = Vector2(0, -30)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_024di")
+player_sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(-20, 25)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_4mok4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fss41")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
