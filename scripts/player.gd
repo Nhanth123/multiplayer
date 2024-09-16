@@ -19,7 +19,7 @@ func _ready() -> void:
 	camera_instantiate.global_position.y = camera_height
 	get_tree().current_scene.add_child.call_deferred(camera_instantiate)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	camera_instantiate.global_position.x = global_position.x
 
 func _physics_process(_delta: float) -> void:
