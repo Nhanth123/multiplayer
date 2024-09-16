@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var player_camera: PackedScene
 @export var player_sprite: AnimatedSprite2D
-@export var camera_height = -132
+@export var camera_height = -378
 
 @export var movement_speed = 300
 @export var gravity = 30

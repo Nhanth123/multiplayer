@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqb2gq8l6pi0t"]
+[gd_scene load_steps=7 format=3 uid="uid://cqb2gq8l6pi0t"]
 
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://assets/platforms/Platformer_spritesheet.png" id="1_jmrlg"]
+[ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://assets/backgrounds/background_01.png" id="2_citrr"]
 [ext_resource type="PackedScene" uid="uid://da6nstlcwwonn" path="res://scenes/player.tscn" id="2_q1txi"]
-[ext_resource type="PackedScene" uid="uid://4k4a30lmeygn" path="res://scenes/player_camera.tscn" id="3_8bjye"]
+[ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://assets/backgrounds/background_02.png" id="3_app2o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hndl2"]
 texture = ExtResource("1_jmrlg")
@@ -42,16 +43,37 @@ sources/0 = SubResource("TileSetAtlasSource_hndl2")
 
 [node name="level_01" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Env" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Env"]
 scale = Vector2(0.5, 0.5)
 tile_set = SubResource("TileSet_ax5yo")
 format = 2
 layer_0/tile_data = PackedInt32Array(-131071, 65536, 1, -131070, 65536, 1, -131069, 65536, 1, -131068, 65536, 1, -131072, 65536, 1, -65537, 131072, 2, -65539, 131072, 2, -65538, 131072, 2, -65541, 131072, 2, -65540, 131072, 2, -131067, 65536, 1, -131066, 65536, 1, -196603, 65536, 1, -262140, 131072, 2, -196604, 65536, 1, -196605, 65536, 1, -196606, 131072, 2, -262141, 131072, 2, -262142, 65536, 2, -196607, 131072, 2, -196608, 131072, 2, -65530, 65536, 1, -65533, 65536, 1, -65532, 65536, 1, -65531, 65536, 1, -65529, 65536, 1, -65528, 65536, 1, -131064, 65536, 1, -131065, 65536, 1, -65542, 131072, 2, -65543, 131072, 2, -65544, 131072, 2, -65545, 131072, 2, -65546, 131072, 2, -65547, 131072, 2, -65548, 131072, 2, -65549, 65536, 2, -65550, 65536, 1, -65551, 65536, 1, -131087, 65536, 1, -196623, 65536, 1, -262159, 65536, 1, -327695, 196608, 2, -327696, 131072, 2, -327697, 65536, 2, -262161, 65536, 1, -196625, 65536, 1, -131089, 65536, 1, -131090, 65536, 1, -131091, 65536, 1, -131092, 65536, 1, -196622, 131072, 2, -196621, 131072, 2, -131085, 131072, 2, -131086, 65536, 1, -131088, 65536, 1, -196626, 65536, 1, -196627, 65536, 1, -196628, 196608, 2, -196624, 65536, 1, -262160, 65536, 1, -65534, 65536, 1, -65535, 65536, 1, -65536, 65536, 1, -1, 65536, 1, -2, 65536, 1, -3, 65536, 1, -4, 65536, 1, -5, 65536, 1, -6, 65536, 1, -7, 65536, 1, -8, 65536, 1, -9, 65536, 1, -10, 65536, 1, -11, 65536, 1, -12, 65536, 1, -13, 65536, 1, -14, 65536, 1, -15, 65536, 1, -65552, 65536, 1, -65553, 65536, 1, -65554, 65536, 1, -65555, 65536, 1, -65556, 65536, 1, -262162, 131072, 2, -262163, 65536, 2, -196629, 65536, 2, -131093, 65536, 1, -65557, 65536, 1, -262139, 65536, 2, -196602, 65536, 2, -196601, 131072, 2, -196600, 131072, 2, -196599, 131072, 2, -196598, 131072, 2, -196597, 131072, 2, -196596, 131072, 2, -196595, 196608, 2, -131063, 65536, 1, -65527, 65536, 1, -131062, 65536, 1, -65526, 65536, 1, -131061, 65536, 1, -65525, 65536, 1, -131060, 65536, 1, -65524, 65536, 1, -131059, 65536, 1, -65523, 65536, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_q1txi")]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Env"]
+offset = Vector2(0, -370)
+transform = Transform2D(1, 0, 0, 1, 0, -370)
+
+[node name="ParallaxTree" type="ParallaxLayer" parent="Env/ParallaxBackground"]
+motion_scale = Vector2(0.15, 1)
+motion_mirroring = Vector2(1334, 0)
+
+[node name="BackgroundTree" type="Sprite2D" parent="Env/ParallaxBackground/ParallaxTree"]
+position = Vector2(0, -378)
+texture = ExtResource("2_citrr")
+centered = false
+
+[node name="ParallaxHouse" type="ParallaxLayer" parent="Env/ParallaxBackground"]
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(1334, 0)
+
+[node name="BackgroundHouse" type="Sprite2D" parent="Env/ParallaxBackground/ParallaxHouse"]
+position = Vector2(0, -378)
+texture = ExtResource("3_app2o")
+centered = false
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("2_q1txi")]
 position = Vector2(-127, -260)
-
-[node name="Camera2D" parent="." instance=ExtResource("3_8bjye")]
-position = Vector2(0, -322)
-
-[node name="Node" type="Node" parent="."]
