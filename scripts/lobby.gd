@@ -23,8 +23,10 @@ func create_game():
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
+		print("Cound not create a host. " , error)
 		return error
 	
+	print("Hosted a game")
 	multiplayer.multiplayer_peer = peer
 	players[1] = player_info
 	player_connected.emit(1, player_info)
