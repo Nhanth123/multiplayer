@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqb2gq8l6pi0t"]
+[gd_scene load_steps=8 format=3 uid="uid://cqb2gq8l6pi0t"]
 
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_bkeyf"]
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://assets/platforms/Platformer_spritesheet.png" id="1_jmrlg"]
 [ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://assets/backgrounds/background_01.png" id="2_citrr"]
 [ext_resource type="PackedScene" uid="uid://da6nstlcwwonn" path="res://scenes/player.tscn" id="2_q1txi"]
@@ -41,7 +42,11 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_hndl2")
 
-[node name="level_01" type="Node2D"]
+[node name="level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points")]
+script = ExtResource("1_bkeyf")
+player_scene = ExtResource("2_q1txi")
+players_container = NodePath("Players/PlayersContainer")
+spawn_points = [NodePath("Players/SpawnPoint_0"), NodePath("Players/SpawnPoint_1")]
 
 [node name="Env" type="Node" parent="."]
 
@@ -75,5 +80,15 @@ centered = false
 
 [node name="Players" type="Node" parent="."]
 
-[node name="Player" parent="Players" instance=ExtResource("2_q1txi")]
-position = Vector2(-127, -260)
+[node name="PlayersContainer" type="Node2D" parent="Players"]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("../PlayersContainer")
+spawn_limit = 2
+
+[node name="SpawnPoint_0" type="Node2D" parent="Players"]
+position = Vector2(807, -239)
+
+[node name="SpawnPoint_1" type="Node2D" parent="Players"]
+position = Vector2(471, -239)
