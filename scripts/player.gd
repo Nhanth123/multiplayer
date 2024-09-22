@@ -13,16 +13,33 @@ extends CharacterBody2D
 
 var jump_count = 0
 var camera_instantiate
+var owner_id = 1
 
-func _ready() -> void:
+
+func _enter_tree() -> void:
+	owner_id = name.to_int()
+	set_multiplayer_authority(owner_id)
+	if owner_id != multiplayer.get_unique_id():
+		return
+
 	set_up_camera()
 
 func _process(_delta: float) -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
+		
+	if owner_id != multiplayer.get_unique_id():
+		return
+		
 	update_camera_pos()
 
 func _physics_process(_delta: float) -> void:
-	var horizontal_input = (Input.get_action_strength("move_right") 
-	- Input.get_action_strength("move_left"))
+	if owner_id != multiplayer.get_unique_id():
+		return
+
+	var horizontal_input = (
+		Input.get_action_strength("move_right") 
+			- Input.get_action_strength("move_left"))
 	
 	velocity.x = horizontal_input * movement_speed
 	velocity.y += gravity
@@ -32,7 +49,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 	face_movement_direction(horizontal_input)
-
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	player_sprite.play("jump")

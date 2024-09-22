@@ -11,14 +11,16 @@ func _ready() -> void:
 	if not multiplayer.is_server():
 		return
 	
-	multiplayer
-	
 	for id in multiplayer.get_peers():
+		print(id)
 		add_player(id)
 		
 	add_player(1)
 
 func _exit_tree() -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
+	
 	if not multiplayer.is_server():
 		return
 	
