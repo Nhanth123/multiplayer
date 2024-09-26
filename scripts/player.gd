@@ -94,10 +94,7 @@ func handle_movement_state():
 			state = PlayerState.DOUBLE_JUMPING
 		else:
 			state = PlayerState.FALLING
-	
-	if Input.is_action_just_released("jump") and velocity.y < 0.0:
-		velocity.y = 0.0
-	
+
 	# Process state
 	match state:
 		PlayerState.IDLE:
