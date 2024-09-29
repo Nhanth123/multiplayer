@@ -118,6 +118,6 @@ func handle_movement_state():
 			player_sprite.play("fall")
 
 	#Player cancels jumping
-	if Input.is_action_just_pressed("jump") and velocity.y < 0.0:
+	if Input.is_action_just_released("jump") and velocity.y < 0.0:
 		velocity.y = 0.0
 	
