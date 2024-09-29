@@ -80,10 +80,15 @@ position = Vector2(0, -378)
 texture = ExtResource("3_app2o")
 centered = false
 
+[node name="Interactable" type="Node" parent="."]
+
+[node name="PressurePlate" parent="Interactable" instance=ExtResource("6_tw6ns")]
+position = Vector2(606, -196)
+
 [node name="Players" type="Node" parent="."]
 
 [node name="PlayersContainer" type="Node2D" parent="Players"]
-position = Vector2(-192, -208)
+position = Vector2(216, -302)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
@@ -94,7 +99,4 @@ spawn_limit = 2
 position = Vector2(502, -238)
 
 [node name="SpawnPoint_1" type="Node2D" parent="Players"]
-position = Vector2(760, -235)
-
-[node name="PressurePlate" parent="." instance=ExtResource("6_tw6ns")]
-position = Vector2(257, -299)
+position = Vector2(651, -244)

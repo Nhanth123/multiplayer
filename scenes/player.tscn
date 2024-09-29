@@ -317,6 +317,8 @@ properties/2/replication_mode = 1
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
 position = Vector2(0, -30)
 scale = Vector2(0.1, 0.1)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_024di")
 player_camera = ExtResource("2_inq8w")
 player_sprite = NodePath("AnimatedSprite2D")

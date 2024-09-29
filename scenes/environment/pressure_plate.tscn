@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx3e3tlu1chp3"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3e3tlu1chp3"]
 
+[ext_resource type="Script" path="res://scenes/environment/pressure_plate.gd" id="1_7dqu8"]
 [ext_resource type="Texture2D" uid="uid://cu3ucp0ocryit" path="res://assets/objects/Pillar_01.png" id="1_yjfvr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b23xx"]
 size = Vector2(48, 10)
 
-[node name="PressurePlate" type="Node2D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7ss7h"]
+properties/0/path = NodePath(".:is_down")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PressurePlate" type="Node2D" node_paths=PackedStringArray("plate_up", "plate_down")]
+z_index = -100
+script = ExtResource("1_7dqu8")
+plate_up = NodePath("PlateUp")
+plate_down = NodePath("PlateDown")
 
 [node name="PlateUp" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.3)
@@ -22,3 +32,10 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_b23xx")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7ss7h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_synchronized"]
