@@ -88,7 +88,6 @@ position = Vector2(606, -196)
 
 [node name="Door" parent="Interactable" instance=ExtResource("7_71fdy")]
 position = Vector2(429, -192)
-is_open = true
 
 [node name="Players" type="Node" parent="."]
 
@@ -105,3 +104,6 @@ position = Vector2(502, -238)
 
 [node name="SpawnPoint_1" type="Node2D" parent="Players"]
 position = Vector2(651, -244)
+
+[connection signal="toggle" from="Interactable/PressurePlate" to="." method="_on_pressure_plate_toggle"]
+[connection signal="toggle" from="Interactable/PressurePlate" to="Interactable/Door" method="activate"]

@@ -1,5 +1,6 @@
 extends Node2D
 
+signal toggle(state)
 
 @export var is_down = false
 @export var plate_up: Sprite2D
@@ -16,6 +17,9 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
+		
 	if not multiplayer.is_server():
 		return
 		
@@ -24,6 +28,7 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 
 func update_on_plate():
 	is_down = bodies_on_plate >= 1
+	toggle.emit(is_down)
 	set_plate_properties()
 	
 func set_plate_properties():
