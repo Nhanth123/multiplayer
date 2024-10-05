@@ -9,7 +9,7 @@ size = Vector2(48, 10)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7ss7h"]
 properties/0/path = NodePath(".:is_down")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 
 [node name="PressurePlate" type="Node2D" node_paths=PackedStringArray("plate_up", "plate_down")]
 z_index = -100
@@ -38,4 +38,4 @@ replication_config = SubResource("SceneReplicationConfig_7ss7h")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_synchronized"]
+[connection signal="delta_synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_delta_synchronized"]

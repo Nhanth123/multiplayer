@@ -47,5 +47,5 @@ func get_spawn_point():
 	return spawn_point
 
 
-func _on_pressure_plate_toggle(state: Variant) -> void:
+func _on_pressure_plate_toggle(_state: Variant) -> void:
 	pass # Replace with function body.
